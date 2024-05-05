@@ -3,7 +3,7 @@ import random
 import time
 ROWS = 10
 COLUMNS = 10
-MINE_COUNT = 2
+MINE_COUNT = 5
 
 BOARD = []
 MINES = set()
@@ -164,39 +164,25 @@ def has_won():
 #     print(f'Heuristic player plays random {rand_square}')
 #     return rand_square
 
-def heuristic_player():
+def heuristic_player_directed():
     options = []
     for i in range(ROWS):
         for j in range(COLUMNS):
             if MATRIX[i][j] == '?':
                 options.append((i, j))
 
-    # Prioritize squares based on the heuristic
-    prioritized_squares = []
+    # Calculate the information gain for each square
+    information_gain = {}
     for square in options:
         i, j = square
         num_mines, adjacent_squares_list = adjacent_squares(i, j)
         unknown_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] == '?']
-        score = num_mines * 10 + len(unknown_adjacent_squares)
-        prioritized_squares.append((score, square))
+        information_gain[square] = len(unknown_adjacent_squares)
 
-    # Sort squares based on score in descending order
-    prioritized_squares.sort(reverse=True)
-
-    # If there are prioritized squares, choose the one with the highest score
-    if prioritized_squares:
-        selected_square = prioritized_squares[0][1]
-        print(f'Heuristic player plays {selected_square}')
-        return selected_square
-    
-    # If no prioritized squares, choose randomly from all options
-    rand_square = random.choice(options)
-    print(f'Heuristic player plays random {rand_square}')
-    return rand_square
-
-
-
-
+    # Choose the square with the highest information gain
+    selected_square = max(information_gain, key=information_gain.get)
+    print(f'Heuristic player with directed exploration plays {selected_square}')
+    return selected_square
 
 
 def random_player():
@@ -246,7 +232,7 @@ def run_simulation():
 
     while True:
         # Heuristic player's turn
-        square = heuristic_player()
+        square = heuristic_player_directed()
         print(f"Juega en: {square}")
         mine_hit = update_board(square)
         #print(draw_board())

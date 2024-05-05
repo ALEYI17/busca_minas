@@ -1,0 +1,836 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{xmpmulti}
+\usepackage{algorithm,algpseudocode}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Taller 1- problema Ordenamiento
+\end_layout
+
+\begin_layout Author
+Alejandro Salamanca, Andrés Salamanca
+\end_layout
+
+\begin_layout Date
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+
+\lang spanish
+En este documento se presenta el análisis de 3 diferentes algoritmos bubble
+ sort, selection sort y quick sort
+\end_layout
+
+\begin_layout Part
+
+\lang spanish
+Análisis y diseño del problema
+\end_layout
+
+\begin_layout Section
+
+\lang spanish
+Análisis
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El problema, informalmente, se puede describir como: se puede calcular una
+ para una secuencia de elementos 
+\begin_inset Formula $S=\left\langle a_{1},a_{2},a_{3},\ldots,a_{n}\right\rangle $
+\end_inset
+
+,en donde 
+\begin_inset Formula $\forall,a\in\mathbb{T}$
+\end_inset
+
+ y en 
+\begin_inset Formula $\mathbb{T}$
+\end_inset
+
+ existe una relacion de orden parcial 
+\begin_inset Formula $\leq$
+\end_inset
+
+ una secuencia ordenada , es decir una permutacion 
+\begin_inset Formula $S'=\left\langle a_{1}',a_{2}',a_{3}',\ldots,a_{n}'\right\rangle $
+\end_inset
+
+en donde 
+\begin_inset Formula $a'_{i}\leq a'_{i+1}$
+\end_inset
+
+y 
+\begin_inset Formula $a'_{i}\in S$
+\end_inset
+
+ .Por ejemlo para 
+\begin_inset Formula $S=\left\langle 5,4,3,2,1\right\rangle $
+\end_inset
+
+, 
+\begin_inset Formula $S'=\left\langle 1,2,3,4,5\right\rangle $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang spanish
+Diseño
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Con las observaciones presentadas en el análisis anterior, podemos escribir
+ el diseño de un algoritmo que solucione el problema .
+ A veces este diseño se conoce como el 
+\begin_inset Quotes cld
+\end_inset
+
+contrato
+\begin_inset Quotes crd
+\end_inset
+
+ del algoritmmos o las 
+\begin_inset Quotes cld
+\end_inset
+
+precondiciones
+\begin_inset Quotes crd
+\end_inset
+
+ y 
+\begin_inset Quotes cld
+\end_inset
+
+poscondiciones
+\begin_inset Quotes crd
+\end_inset
+
+ del algoritmo.
+ El diseño se compone de entradas y salidas:
+\end_layout
+
+\begin_layout Definition*
+
+\lang spanish
+Entradas:
+\end_layout
+
+\begin_layout Enumerate
+
+\lang spanish
+\begin_inset Formula $S=\left\langle a_{1},a_{2},a_{3},\ldots,a_{n}\right\rangle $
+\end_inset
+
+,en donde 
+\begin_inset Formula $\forall,a\in\mathbb{T}$
+\end_inset
+
+ y en 
+\begin_inset Formula $\mathbb{T}$
+\end_inset
+
+ existe una relacion de orden parcial 
+\begin_inset Formula $\leq$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+
+\lang spanish
+Salidas:
+\end_layout
+
+\begin_layout Enumerate
+
+\lang spanish
+\begin_inset Formula $S'=\left\langle a_{1}',a_{2}',a_{3}',\ldots,a_{n}'\right\rangle $
+\end_inset
+
+en donde 
+\begin_inset Formula $a'_{i}\leq a'_{i+1}$
+\end_inset
+
+y 
+\begin_inset Formula $a'_{i}\in S$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+
+\lang spanish
+Algoritmos
+\end_layout
+
+\begin_layout Section
+
+\lang spanish
+Opción algoritmo 1
+\end_layout
+
+\begin_layout Subsection
+
+\lang spanish
+Algoritmo
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Este algoritmo se basa en llevar de forma iterativa el elemento mayor hacia
+ el final de la secuencia realizando intercambios hasta dejar la secuencia
+ ordenada
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procedure
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+Bublle sort 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $S$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $j\leftarrow1$
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{to}$
+\end_inset
+
+ 
+\begin_inset Formula $\left\lceil S\right\rceil $
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $i\leftarrow1$
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{to}$
+\end_inset
+
+ 
+\begin_inset Formula $\left\lceil S\right\rceil $
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $S[i]>S[i+1]$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $Swap(S,i,i+1)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+  
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Return
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $S$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndProcedure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bubble sort
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang spanish
+Complejidad
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El algoritmo 
+\noun on
+bubble sort
+\noun default
+ tiene órden de complejidad .
+ 
+\begin_inset Formula $O(n^{2})$
+\end_inset
+
+ .La complejidad es hallada por inspección 
+\end_layout
+
+\begin_layout Subsection
+
+\lang spanish
+Invariante
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\bar under
+\lang spanish
+Inicio
+\series default
+\bar default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\bar under
+\lang spanish
+Avance
+\series default
+\bar default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\bar under
+\lang spanish
+Terminación
+\end_layout
+
+\begin_layout Subsection
+
+\lang spanish
+Notas de implementación
+\end_layout
+
+\begin_layout Part
+
+\lang spanish
+Comparación de los algoritmos
+\end_layout
+
+\end_body
+\end_document

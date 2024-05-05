@@ -144,28 +144,25 @@ def Combination_player():
             if MATRIX[i][j] == '?':
                 options.append((i, j))
     
-    # Generate all possible combinations of moves
-    all_combinations = []
-    for r in range(1, len(options) + 1):
-        all_combinations.extend(itertools.combinations(options, r))
-    
     # Iterate over combinations and check for a winning move
-    for combination in all_combinations:
-        # Track changes made by the current combination
-        for move in combination:
-            update_board(move, selected=False)
-            if has_won():
-                # If a winning move is found, revert other moves and return the winning move
-                print(f'Combination player plays {combination}')
-                for other_move in combination:
-                    if other_move != move:
-                        i, j = other_move
-                        MATRIX[i][j] = '?'
-                return move
-            else:
-                # Revert the move since it didn't lead to a win
-                i, j = move
-                MATRIX[i][j] = '?'
+    for r in range(1, len(options) + 1):
+        # Generate combinations of size 'r' and iterate over them
+        for combination in itertools.combinations(options, r):
+            # Track changes made by the current combination
+            for move in combination:
+                update_board(move, selected=False)
+                if has_won():
+                    # If a winning move is found, revert other moves and return the winning move
+                    print(f'Combination player plays {combination}')
+                    for other_move in combination:
+                        if other_move != move:
+                            i, j = other_move
+                            MATRIX[i][j] = '?'
+                    return move
+                else:
+                    # Revert the move since it didn't lead to a win
+                    i, j = move
+                    MATRIX[i][j] = '?'
     
     # If no winning move is found, return None
     return None

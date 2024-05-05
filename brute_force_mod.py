@@ -1,9 +1,9 @@
 import math
 import random
 from itertools import combinations
-ROWS = 10
-COLUMNS = 10
-MINE_COUNT = 10
+ROWS = 5
+COLUMNS = 5
+MINE_COUNT = 5
 
 BOARD = []
 MINES = set()
@@ -171,9 +171,7 @@ def random_player():
     rand_square = options[random.randint(0, len(options))]
     print(f'Random player plays {rand_square}')
     return rand_square
-    # NO SE PUEDE REVISAR  MINES!!!
-    #TODO: 1. Combinaciones de opciones seleccionadas y no seleccionadas (fuerza bruta)
-    #TODO: 2. Heurística: Revisar combinaciones promisorias
+
 
 if __name__ == '__main__':
     create_board()
@@ -188,23 +186,6 @@ if __name__ == '__main__':
 
     while True:
         print(draw_board())
-        # square = parse_selection(input('> '))
-        # if not square or len(square) < 2:
-        #     print('Unable to parse indicies, try again...')
-        #     continue
-
-        # mine_hit = update_board(square)
-        # if mine_hit or has_won():
-        #     if mine_hit:
-        #         reveal_mines()
-        #         print(draw_board())
-        #         print('Game over')
-        #     else:
-        #         print(draw_board())
-        #         print('You won!')
-        #     break
-
-        # Brute-force player's turn
         square_to_select = brute_force_player(EXTENDED)
         if square_to_select:
             print('Brute-force player plays {}'.format(square_to_select))

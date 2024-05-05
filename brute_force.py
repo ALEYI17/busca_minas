@@ -1,6 +1,7 @@
 import math
 import random
-from itertools import combinations
+import itertools
+import copy
 ROWS = 10
 COLUMNS = 10
 MINE_COUNT = 10
@@ -136,28 +137,42 @@ def has_won():
     return len(EXTENDED | MINES) == len(BOARD)
 
 
-def brute_force_player(extended):
+def Combination_player():
     options = []
     for i in range(ROWS):
         for j in range(COLUMNS):
             if MATRIX[i][j] == '?':
                 options.append((i, j))
-
-    # Generate all possible combinations of squares to select
+    
+    # Generate all possible combinations of moves
+    all_combinations = []
     for r in range(1, len(options) + 1):
-        for combination in combinations(options, r):
-            extended_copy = extended.copy()
-            for square in combination:
-                i, j = square
-                num_mines, _ = adjacent_squares(i, j)
-                if num_mines > 0:
-                    break
-                update_board(square)
-                if has_won():
-                    return combination
-            extended = extended_copy.copy()
-
+        all_combinations.extend(itertools.combinations(options, r))
+    
+    # Iterate over combinations and check for a winning move
+    for combination in all_combinations:
+        # Track changes made by the current combination
+        for move in combination:
+            update_board(move, selected=False)
+            if has_won():
+                # If a winning move is found, revert other moves and return the winning move
+                print(f'Combination player plays {combination}')
+                for other_move in combination:
+                    if other_move != move:
+                        i, j = other_move
+                        MATRIX[i][j] = '?'
+                return move
+            else:
+                # Revert the move since it didn't lead to a win
+                i, j = move
+                MATRIX[i][j] = '?'
+    
+    # If no winning move is found, return None
     return None
+
+
+
+
 
 def random_player():
     options = []
@@ -168,50 +183,33 @@ def random_player():
     rand_square = options[random.randint(0, len(options))]
     print(f'Random player plays {rand_square}')
     return rand_square
-    # NO SE PUEDE REVISAR  MINES!!!
-    #TODO: 1. Combinaciones de opciones seleccionadas y no seleccionadas (fuerza bruta)
-    #TODO: 2. Heurística: Revisar combinaciones promisorias
 
 if __name__ == '__main__':
     create_board()
 
     print('Enter coordinates (ie: 0 3)')
-
-    # First move by random player
-    random_square = random_player()
-    update_board(random_square)
-
-
+    first_play = True
 
     while True:
+
         print(draw_board())
-        # square = parse_selection(input('> '))
-        # if not square or len(square) < 2:
-        #     print('Unable to parse indicies, try again...')
-        #     continue
-
-        # mine_hit = update_board(square)
-        # if mine_hit or has_won():
-        #     if mine_hit:
-        #         reveal_mines()
-        #         print(draw_board())
-        #         print('Game over')
-        #     else:
-        #         print(draw_board())
-        #         print('You won!')
-        #     break
-
-        # Brute-force player's turn
-        square_to_select = brute_force_player(EXTENDED)
-        if square_to_select:
-            print('Brute-force player plays {}'.format(square_to_select))
-            for square in square_to_select:
-                print(f"Squeare: {square}")
-                update_board(square)
+        if first_play:
+          square = random_player()
+          first_play = False
         else:
-            print("Brute-force player couldn't find a move.")
-        
-        if has_won():
-            print(draw_board())
-            print('You won!')
+          square = Combination_player()
+
+        if not square or len(square) < 2:
+            print('Unable to parse indicies, try again...')
+            break
+
+        mine_hit = update_board(square)
+        if mine_hit or has_won():
+            if mine_hit:
+                reveal_mines()
+                print(draw_board())
+                print('Game over')
+            else:
+                print(draw_board())
+                print('You won!')
             break

@@ -87,7 +87,7 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-Taller 1- problema Ordenamiento
+Taller 4- Busca minas
 \end_layout
 
 \begin_layout Author
@@ -115,8 +115,37 @@ today
 \begin_layout Abstract
 
 \lang spanish
-En este documento se presenta el análisis de 3 diferentes algoritmos bubble
- sort, selection sort y quick sort
+El informe presenta dos enfoques algorítmicos para abordar el desafío del
+ juego de buscaminas, el cual se caracteriza por ser un problema NP-completo.
+ 
+\end_layout
+
+\begin_layout Abstract
+
+\lang spanish
+El primer algoritmo propuesto es el de fuerza bruta, que consiste en generar
+ y evaluar exhaustivamente todas las combinaciones posibles de movimientos
+ para encontrar una solución al juego.
+ 
+\end_layout
+
+\begin_layout Abstract
+
+\lang spanish
+El segundo algoritmo se basa en la aplicación de una heurística para guiar
+ la búsqueda hacia una solución plausible del juego.
+ Esta estrategia busca reducir la complejidad del problema al considerar
+ únicamente movimientos prometedores según la heurística empleada.
+\end_layout
+
+\begin_layout Abstract
+
+\lang spanish
+El análisis comparativo entre ambos algoritmos se centra en la evaluación
+ del tiempo de ejecución y la calidad de las soluciones obtenidas por cada
+ uno.
+ Esta comparación permitirá determinar la eficacia y la eficiencia relativa
+ de cada enfoque en la resolución del juego de buscaminas.
 \end_layout
 
 \begin_layout Part
@@ -134,44 +163,78 @@ Análisis
 \begin_layout Standard
 
 \lang spanish
-El problema, informalmente, se puede describir como: se puede calcular una
- para una secuencia de elementos 
-\begin_inset Formula $S=\left\langle a_{1},a_{2},a_{3},\ldots,a_{n}\right\rangle $
+El problema del busca minas se presenta como un desafío complejo en el que
+ los jugadores deben encontrar soluciones óptimas para completar el juego
+ con éxito.
+ En este juego, se despliega un tablero de dimensiones 
+\begin_inset Formula $N\times M$
 \end_inset
 
-,en donde 
-\begin_inset Formula $\forall,a\in\mathbb{T}$
+ que es representado por una matriz 
+\begin_inset Formula $A$
 \end_inset
 
- y en 
-\begin_inset Formula $\mathbb{T}$
+, y se esconden 
+\begin_inset Formula $X$
 \end_inset
 
- existe una relacion de orden parcial 
-\begin_inset Formula $\leq$
-\end_inset
-
- una secuencia ordenada , es decir una permutacion 
-\begin_inset Formula $S'=\left\langle a_{1}',a_{2}',a_{3}',\ldots,a_{n}'\right\rangle $
-\end_inset
-
-en donde 
-\begin_inset Formula $a'_{i}\leq a'_{i+1}$
-\end_inset
-
-y 
-\begin_inset Formula $a'_{i}\in S$
-\end_inset
-
- .Por ejemlo para 
-\begin_inset Formula $S=\left\langle 5,4,3,2,1\right\rangle $
-\end_inset
-
-, 
-\begin_inset Formula $S'=\left\langle 1,2,3,4,5\right\rangle $
+ minas , donde 
+\begin_inset Formula $N,M,X\in\mathbb{N}$
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El tablero, conformado por 
+\begin_inset Formula $N$
+\end_inset
+
+ filas y 
+\begin_inset Formula $M$
+\end_inset
+
+ columnas, representa el campo de juego donde se encuentran distribuidas
+ las minas.
+ Cada casilla del tablero puede estar en uno de dos estados: oculta o descubiert
+a.
+ Inicialmente, todas las casillas están ocultas, y los jugadores deben seleccion
+ar casillas para descubrir su contenido.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El número total de minas, representado por 
+\begin_inset Formula $X$
+\end_inset
+
+, es conocido por los jugadores desde el inicio del juego.
+ Sin embargo, la ubicación específica de las minas permanece oculta, lo
+ que introduce incertidumbre y complejidad en el proceso de toma de decisiones.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El objetivo del juego es descubrir todas las casillas que no contienen minas,
+ evitando activar ninguna mina en el proceso.
+ Para facilitar esta tarea, cada casilla del tablero revela un número que
+ indica la cantidad de minas adyacentes a esa casilla.
+ Esta información permite a los jugadores aplicar lógica y deducción para
+ determinar la ubicación de las minas y evitar casillas peligrosas.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El desafío del busca minas radica en encontrar soluciones óptimas que permitan
+ completar el juego de manera eficiente y segura.
+ Esto implica desarrollar estrategias y algoritmos que optimicen la selección
+ de casillas para revelar, minimizando el riesgo de activar una mina y maximizan
+do la certeza en la ubicación de las minas restantes.
 \end_layout
 
 \begin_layout Section
@@ -180,61 +243,24 @@ y
 Diseño
 \end_layout
 
-\begin_layout Standard
-
-\lang spanish
-Con las observaciones presentadas en el análisis anterior, podemos escribir
- el diseño de un algoritmo que solucione el problema .
- A veces este diseño se conoce como el 
-\begin_inset Quotes cld
-\end_inset
-
-contrato
-\begin_inset Quotes crd
-\end_inset
-
- del algoritmmos o las 
-\begin_inset Quotes cld
-\end_inset
-
-precondiciones
-\begin_inset Quotes crd
-\end_inset
-
- y 
-\begin_inset Quotes cld
-\end_inset
-
-poscondiciones
-\begin_inset Quotes crd
-\end_inset
-
- del algoritmo.
- El diseño se compone de entradas y salidas:
-\end_layout
-
 \begin_layout Definition*
 
 \lang spanish
 Entradas:
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Definition*
 
 \lang spanish
-\begin_inset Formula $S=\left\langle a_{1},a_{2},a_{3},\ldots,a_{n}\right\rangle $
+\begin_inset Formula $A=\begin{bmatrix}a_{11} & a_{12} & \cdots & a_{1M}\\
+a_{21} & a_{22} & \cdots & a_{2M}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{N1} & a_{N2} & \cdots & a_{NM}
+\end{bmatrix}$
 \end_inset
 
-,en donde 
-\begin_inset Formula $\forall,a\in\mathbb{T}$
-\end_inset
-
- y en 
-\begin_inset Formula $\mathbb{T}$
-\end_inset
-
- existe una relacion de orden parcial 
-\begin_inset Formula $\leq$
+, en donde 
+\begin_inset Formula $\forall,a_{ij}\in\mathbb{N}$
 \end_inset
 
 
@@ -242,46 +268,42 @@ Entradas:
 
 \begin_layout Standard
 
-\lang spanish
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
 \end_layout
 
 \begin_layout Definition*
 
 \lang spanish
-Salidas:
+Salidas: 
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Definition*
 
 \lang spanish
-\begin_inset Formula $S'=\left\langle a_{1}',a_{2}',a_{3}',\ldots,a_{n}'\right\rangle $
+\begin_inset Formula $Move=(i,j)$
 \end_inset
 
-en donde 
-\begin_inset Formula $a'_{i}\leq a'_{i+1}$
+, donde 
+\begin_inset Formula $i$
 \end_inset
 
-y 
-\begin_inset Formula $a'_{i}\in S$
+ y 
+\begin_inset Formula $j$
 \end_inset
 
+ son números naturales,
+\begin_inset Formula $i,j∈N$
+\end_inset
 
+, que representan las coordenadas de fila y columna, respectivamente, del
+ próximo movimiento en el juego.
+\end_layout
+
+\begin_layout Definition*
+La tupla 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ representa la casilla seleccionada para ser revelada en el tablero.
 \end_layout
 
 \begin_layout Standard
@@ -325,14 +347,6 @@ Opción algoritmo 1
 
 \lang spanish
 Algoritmo
-\end_layout
-
-\begin_layout Standard
-
-\lang spanish
-Este algoritmo se basa en llevar de forma iterativa el elemento mayor hacia
- el final de la secuencia realizando intercambios hasta dejar la secuencia
- ordenada
 \end_layout
 
 \begin_layout Standard
@@ -750,7 +764,7 @@ end{algorithmic}
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Bubble sort
+Fuerza bruta
 \end_layout
 
 \end_inset
@@ -767,21 +781,6 @@ Bubble sort
 
 \lang spanish
 Complejidad
-\end_layout
-
-\begin_layout Standard
-
-\lang spanish
-El algoritmo 
-\noun on
-bubble sort
-\noun default
- tiene órden de complejidad .
- 
-\begin_inset Formula $O(n^{2})$
-\end_inset
-
- .La complejidad es hallada por inspección 
 \end_layout
 
 \begin_layout Subsection

@@ -87,11 +87,21 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-Taller 4- Busca minas
+Taller 4- 
+\lang spanish
+Busca
+\lang english
+ 
+\lang spanish
+minas
 \end_layout
 
 \begin_layout Author
-Alejandro Salamanca, Andrés Salamanca
+Alejandro 
+\lang spanish
+Salamanca
+\lang english
+, Andrés Salamanca
 \end_layout
 
 \begin_layout Date
@@ -160,6 +170,83 @@ Análisis y diseño del problema
 Análisis
 \end_layout
 
+\begin_layout Standard
+
+\lang spanish
+El problema del busca minas se presenta como un desafío complejo en el que
+ los jugadores deben encontrar soluciones óptimas para completar el juego
+ con éxito.
+ En este juego, se despliega un tablero de dimensiones 
+\begin_inset Formula $N\times M$
+\end_inset
+
+ que es representado por una matriz 
+\begin_inset Formula $A$
+\end_inset
+
+, y se esconden 
+\begin_inset Formula $X$
+\end_inset
+
+ minas , donde 
+\begin_inset Formula $N,M,X\in\mathbb{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El tablero, conformado por 
+\begin_inset Formula $N$
+\end_inset
+
+ filas y 
+\begin_inset Formula $M$
+\end_inset
+
+ columnas, representa el campo de juego donde se encuentran distribuidas
+ las minas.
+ Cada casilla del tablero puede estar en uno de dos estados: oculta o descubiert
+a.
+ Inicialmente, todas las casillas están ocultas, y los jugadores deben seleccion
+ar casillas para descubrir su contenido.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El número total de minas, representado por 
+\begin_inset Formula $X$
+\end_inset
+
+, es conocido por los jugadores desde el inicio del juego.
+ Sin embargo, la ubicación específica de las minas permanece oculta, lo
+ que introduce incertidumbre y complejidad en el proceso de toma de decisiones.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El objetivo del juego es descubrir todas las casillas que no contienen minas,
+ evitando activar ninguna mina en el proceso.
+ Para facilitar esta tarea, cada casilla del tablero revela un número que
+ indica la cantidad de minas adyacentes a esa casilla.
+ Esta información permite a los jugadores aplicar lógica y deducción para
+ determinar la ubicación de las minas y evitar casillas peligrosas.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El desafío del busca minas radica en encontrar soluciones óptimas que permitan
+ completar el juego de manera eficiente y segura.
+ Esto implica desarrollar estrategias y algoritmos que optimicen la selección
+ de casillas para revelar, minimizando el riesgo de activar una mina y maximizan
+do la certeza en la ubicación de las minas restantes.
+\end_layout
+
 \begin_layout Section
 
 \lang spanish
@@ -172,31 +259,61 @@ Diseño
 Entradas:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Definition*
 
 \lang spanish
-\begin_inset space ~
+\begin_inset Formula $A=\begin{bmatrix}a_{11} & a_{12} & \cdots & a_{1M}\\
+a_{21} & a_{22} & \cdots & a_{2M}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{N1} & a_{N2} & \cdots & a_{NM}
+\end{bmatrix}$
+\end_inset
+
+, en donde 
+\begin_inset Formula $\forall,a_{ij}\in\mathbb{N}$
 \end_inset
 
 
-\begin_inset space ~
-\end_inset
+\end_layout
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
+\begin_layout Standard
 
 \end_layout
 
 \begin_layout Definition*
 
 \lang spanish
-Salidas:
+Salidas: 
+\end_layout
+
+\begin_layout Definition*
+
+\lang spanish
+\begin_inset Formula $Move=(i,j)$
+\end_inset
+
+, donde 
+\begin_inset Formula $i$
+\end_inset
+
+ y 
+\begin_inset Formula $j$
+\end_inset
+
+ son números naturales,
+\begin_inset Formula $i,j∈N$
+\end_inset
+
+, que representan las coordenadas de fila y columna, respectivamente, del
+ próximo movimiento en el juego.
+\end_layout
+
+\begin_layout Definition*
+La tupla 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ representa la casilla seleccionada para ser revelada en el tablero.
 \end_layout
 
 \begin_layout Standard
@@ -233,7 +350,21 @@ Algoritmos
 \begin_layout Section
 
 \lang spanish
-Opción algoritmo 1
+Opción algoritmo de fuerza bruta
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La estrategia de fuerza bruta para el juego de buscaminas implica probar
+ todas las posibles combinaciones de casillas ocultas en el tablero, desde
+ una casilla hasta todas las casillas disponibles.
+ Para cada combinación generada, se simula el efecto de revelar las casillas
+ correspondientes en el tablero y se verifica si esta situación conduce
+ a una victoria en el juego.
+ Este enfoque garantiza encontrar una solución correcta al problema, pero
+ puede ser computacionalmente costoso, especialmente en tableros grandes,
+ debido a la exhaustividad de la búsqueda.
 \end_layout
 
 \begin_layout Subsection

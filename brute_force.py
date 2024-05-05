@@ -2,6 +2,7 @@ import math
 import random
 import itertools
 import copy
+import time
 ROWS = 10
 COLUMNS = 10
 MINE_COUNT = 10
@@ -181,32 +182,87 @@ def random_player():
     print(f'Random player plays {rand_square}')
     return rand_square
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+#     create_board()
+
+#     print('Enter coordinates (ie: 0 3)')
+#     first_play = True
+
+#     while True:
+
+#         print(draw_board())
+#         if first_play:
+#           square = random_player()
+#           first_play = False
+#         else:
+#           square = Combination_player()
+
+#         if not square or len(square) < 2:
+#             print('Unable to parse indicies, try again...')
+#             break
+
+#         mine_hit = update_board(square)
+#         if mine_hit or has_won():
+#             if mine_hit:
+#                 reveal_mines()
+#                 print(draw_board())
+#                 print('Game over')
+#             else:
+#                 print(draw_board())
+#                 print('You won!')
+#             break
+
+def run_simulation():
+    start_time = time.time()  # Registra el tiempo inicial
+    # Restablecer todas las estructuras de datos del tablero
+    BOARD.clear()
+    MINES.clear()
+    EXTENDED.clear()
+    for i in range(ROWS):
+        for j in range(COLUMNS):
+            MATRIX[i][j] = '?'
     create_board()
 
-    print('Enter coordinates (ie: 0 3)')
-    first_play = True
+    print('First move by random player')
+    random_square = random_player()
+    update_board(random_square)
+    mine_hit = update_board(random_square)
+    print(draw_board())
+    if mine_hit or has_won():
+        if mine_hit:
+            reveal_mines()
+            print(draw_board())
+            print('Game over')
+            elapsed_time = time.time() - start_time  # Calcula el tiempo transcurrido
+            return 'lost', elapsed_time
+        else:
+            print(draw_board())
+            print('You won!')
+            elapsed_time = time.time() - start_time  # Calcula el tiempo transcurrido
+            return 'won', elapsed_time
 
     while True:
-
-        print(draw_board())
-        if first_play:
-          square = random_player()
-          first_play = False
-        else:
-          square = Combination_player()
-
-        if not square or len(square) < 2:
-            print('Unable to parse indicies, try again...')
-            break
-
+        # Heuristic player's turn
+        square = Combination_player()
+        print(f"Plays at: {square}")
         mine_hit = update_board(square)
+        #print(draw_board())
         if mine_hit or has_won():
             if mine_hit:
                 reveal_mines()
                 print(draw_board())
                 print('Game over')
+                elapsed_time = time.time() - start_time  # Calcula el tiempo transcurrido
+                return 'lost', elapsed_time
             else:
                 print(draw_board())
                 print('You won!')
-            break
+                elapsed_time = time.time() - start_time  # Calcula el tiempo transcurrido
+                return 'won', elapsed_time
+
+# Ejecuta la simulación 100 veces y registra los resultados
+with open("resultadosComb.txt", "w") as file:
+    for i in range(100):
+        print(f"\nSimulation {i + 1}")
+        resultado, tiempo = run_simulation()
+        file.write(f"Simulation {i + 1}: {resultado}, Time: {tiempo} seconds\n")

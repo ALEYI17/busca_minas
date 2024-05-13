@@ -166,31 +166,30 @@ def check_completed_square(i, j):
     not_flagged_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if get_index(x, y) not in FLAGGED_MINES]
     if len(flagged_adjacent_squares) == num_mines:
         for limp_square in not_flagged_adjacent_squares:
-            print("square a limpiar ",i,j," y va a aquitar a ",limp_square)
-            mine_hit = update_board(limp_square)
-            #print(draw_board())
-            if mine_hit or has_won():
-                if mine_hit:
-                    reveal_mines()
-                    #print(draw_board())
-                    print('Game over')
+            x,y = limp_square
+            if MATRIX[x][y] == "?":
+
+                print("square a limpiar ",i,j," y va a aquitar a ",limp_square)
+                mine_hit = update_board(limp_square)
+                #print(draw_board())
+                if mine_hit or has_won():
+                    if mine_hit:
+                        reveal_mines()
+                        #print(draw_board())
+                        print('Game over')
+                        
+                        
+                    else:
+                        #print(draw_board())
+                        print('You won!')
                     
-                    
-                else:
-                    #print(draw_board())
-                    print('You won!')
-                    
 
-
-
-
-def heuristic_player_directed():
+def detect_mines():
     options = []
     for i in range(ROWS):
         for j in range(COLUMNS):
             if MATRIX[i][j] == '?':
                 options.append((i, j))
-
     # Check if any square adjacent to a revealed square has the same number of surrounding unrevealed squares as its number
     for square in options:
         i, j = square
@@ -201,18 +200,18 @@ def heuristic_player_directed():
             adj_num_mines, adj_adjacent_squares_list = adjacent_squares(adj_i, adj_j)
             unknown_adjacent_squares = [(x, y) for x, y in adj_adjacent_squares_list if MATRIX[x][y] == '?']
             if len(unknown_adjacent_squares) == adj_num_mines and len(unknown_adjacent_squares) >0 and get_index(*square) not in FLAGGED_MINES:
-                print(adj_square)
-                print(unknown_adjacent_squares)
+                #print(adj_square)
+                #print(unknown_adjacent_squares)
                 text = colorize(f'Flagging square {square} as a suspected mine',Colors.RED)
                 print(text)
                 FLAGGED_MINES.add(get_index(*square))
 
+def information_gained_algorithm():
     options = []
     for i in range(ROWS):
         for j in range(COLUMNS):
             if MATRIX[i][j] != '?':
                 options.append((i, j))
-
     information_gain = {}
     for square in options:
         if get_index(*square) not in FLAGGED_MINES:
@@ -220,29 +219,12 @@ def heuristic_player_directed():
             num_mines, adjacent_squares_list = adjacent_squares(i, j)
             unknown_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] == '?']
             information_gain[square] = len(unknown_adjacent_squares)
-
     sorted_information_gain = sorted(information_gain.items(), key=lambda x: x[1])
     sorted_information_gain = [(square, gain) for square, gain in sorted_information_gain if gain != 0]
-    # selected_square = None
-    # max_gain = -1
-    # for square, gain in information_gain.items():
-    #     if get_index(*square) not in FLAGGED_MINES and gain > max_gain:
-    #         selected_square = square
-    #         max_gain = gain
+    return sorted_information_gain
 
-    # if selected_square is None:
-    #     # If there are no available squares to select, choose a random square that is not flagged as a mine
-    #     available_squares = [(i, j) for i in range(ROWS) for j in range(COLUMNS) if MATRIX[i][j] == '?' and get_index(i, j) not in FLAGGED_MINES]
-    #     if available_squares:
-    #         selected_square = random.choice(available_squares)
-    #         print(f'No available squares to select. Randomly choosing {selected_square}.')
-    #     else:
-    #         print("No available squares to select.")
-    # else:
-    #     print(f'Heuristic player with directed exploration plays {selected_square}')
+def find_play(sorted_information_gain):
     selected_square = None
-    for square , gain in sorted_information_gain:
-        check_completed_square(*square)
     for square, gain in sorted_information_gain:
         
         num_mines, adjacent_squares_list = adjacent_squares(*square)
@@ -252,6 +234,23 @@ def heuristic_player_directed():
             if get_index(*squad) not in FLAGGED_MINES:
                 selected_square = squad
                 return selected_square
+    return selected_square
+
+def heuristic_player_directed():
+    
+    detect_mines()
+
+    sorted_information_gain = information_gained_algorithm()
+    
+    for square , gain in sorted_information_gain:
+        check_completed_square(*square)
+    
+    detect_mines()
+    print(draw_board())
+    selected_square = None
+    sorted_information_gain = information_gained_algorithm()
+
+    selected_square = find_play(sorted_information_gain)
 
     if selected_square is None:
         # If there are no available squares to select, choose a random square that is not flagged as a mine

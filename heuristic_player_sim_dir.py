@@ -170,6 +170,7 @@ def check_completed_square(i, j):
             if MATRIX[x][y] == "?":
 
                 print("square a limpiar ",i,j," y va a aquitar a ",limp_square)
+                
                 mine_hit = update_board(limp_square)
                 #print(draw_board())
                 if mine_hit or has_won():
@@ -177,11 +178,14 @@ def check_completed_square(i, j):
                         reveal_mines()
                         #print(draw_board())
                         print('Game over')
+                        return limp_square
                         
                         
                     else:
                         #print(draw_board())
                         print('You won!')
+                        return limp_square
+    return not_flagged_adjacent_squares[0]
                     
 
 def detect_mines():
@@ -223,8 +227,8 @@ def information_gained_algorithm():
     sorted_information_gain = [(square, gain) for square, gain in sorted_information_gain if gain != 0]
     return sorted_information_gain
 
-def find_play(sorted_information_gain):
-    selected_square = None
+def find_play(sorted_information_gain,squ):
+    selected_square = squ
     for square, gain in sorted_information_gain:
         
         num_mines, adjacent_squares_list = adjacent_squares(*square)
@@ -241,16 +245,16 @@ def heuristic_player_directed():
     detect_mines()
 
     sorted_information_gain = information_gained_algorithm()
-    
+    selected_square = None
     for square , gain in sorted_information_gain:
-        check_completed_square(*square)
+        selected_square = check_completed_square(*square)
     
     detect_mines()
     print(draw_board())
-    selected_square = None
+    
     sorted_information_gain = information_gained_algorithm()
 
-    selected_square = find_play(sorted_information_gain)
+    selected_square = find_play(sorted_information_gain, selected_square)
 
     if selected_square is None:
         # If there are no available squares to select, choose a random square that is not flagged as a mine
@@ -285,7 +289,7 @@ def random_player():
 def run_simulation():
     start_time = time.time()  # Registra el tiempo inicial
     # Restablecer todas las estructuras de datos del tablero
-    
+    FLAGGED_MINES.clear()
     BOARD.clear()
     MINES.clear()
     EXTENDED.clear()
@@ -334,7 +338,8 @@ def run_simulation():
 
 # Ejecuta la simulación 100 veces y registra los resultados
 with open("resultados.txt", "w") as file:
-    for i in range(1):
+    for i in range(100):
         print(f"\nSimulación {i + 1}")
         resultado, tiempo = run_simulation()
+
         file.write(f"Simulación {i + 1}: {resultado}, Tiempo: {tiempo} segundos\n")

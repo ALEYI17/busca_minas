@@ -1,1 +1,1 @@
-Simulación 1: lost, Tiempo: 0.0537569522857666 segundos
+Simulación 1: lost, Tiempo: 0.010365486145019531 segundos

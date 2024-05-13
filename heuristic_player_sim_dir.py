@@ -158,6 +158,32 @@ def has_won():
 #     selected_square = max(information_gain, key=information_gain.get)
 #     print(f'Heuristic player with directed exploration plays {selected_square}')
 #     return selected_square
+
+def check_completed_square(i, j):
+    num_mines = MATRIX[i][j]
+    num,adjacent_squares_list = adjacent_squares(i, j)
+    flagged_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if get_index(x, y) in FLAGGED_MINES]
+    not_flagged_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if get_index(x, y) not in FLAGGED_MINES]
+    if len(flagged_adjacent_squares) == num_mines:
+        for limp_square in not_flagged_adjacent_squares:
+            print("square a limpiar ",i,j," y va a aquitar a ",limp_square)
+            mine_hit = update_board(limp_square)
+            #print(draw_board())
+            if mine_hit or has_won():
+                if mine_hit:
+                    reveal_mines()
+                    #print(draw_board())
+                    print('Game over')
+                    
+                    
+                else:
+                    #print(draw_board())
+                    print('You won!')
+                    
+
+
+
+
 def heuristic_player_directed():
     options = []
     for i in range(ROWS):
@@ -215,9 +241,13 @@ def heuristic_player_directed():
     # else:
     #     print(f'Heuristic player with directed exploration plays {selected_square}')
     selected_square = None
+    for square , gain in sorted_information_gain:
+        check_completed_square(*square)
     for square, gain in sorted_information_gain:
+        
         num_mines, adjacent_squares_list = adjacent_squares(*square)
         unknown_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] == '?']
+
         for squad in unknown_adjacent_squares:
             if get_index(*squad) not in FLAGGED_MINES:
                 selected_square = squad

@@ -76,12 +76,13 @@ def adjacent_squares(i, j):
                 continue
 
             coordinates = i + di, j + dj
-
+            print("coordinates",coordinates)
             # Skip squares off the board
             proposed_index = get_index(*coordinates)
-            if not proposed_index:
+            print("propose_index",proposed_index)
+            if proposed_index is None:
                 continue
-
+            print("propose_index luego if",proposed_index)
             if proposed_index in MINES:
                 num_mines += 1
 
@@ -151,7 +152,7 @@ def random_player():
 
 if __name__ == '__main__':
     create_board()
-
+    print("hola",adjacent_squares(1,0))
     print('Enter coordinates (ie: 0 3)')
 
     while True:

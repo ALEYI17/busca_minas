@@ -3,7 +3,7 @@ import random
 import time
 ROWS = 10
 COLUMNS = 10
-MINE_COUNT = 5
+MINE_COUNT = 10
 
 BOARD = []
 MINES = set()
@@ -11,6 +11,7 @@ EXTENDED = set()
 
 MATRIX = [['?'] * COLUMNS for i in range(ROWS)]
 
+FLAGGED_MINES = set()
 
 class Colors(object):
     BLUE = '\033[94m'
@@ -71,6 +72,7 @@ def adjacent_squares(i, j):
     squares_to_check = []
     for di in [-1, 0, 1]:
         for dj in [-1, 0, 1]:
+            
             # Skip current square
             if di == dj == 0:
                 continue
@@ -79,13 +81,14 @@ def adjacent_squares(i, j):
 
             # Skip squares off the board
             proposed_index = get_index(*coordinates)
-            if not proposed_index:
+            if proposed_index is None:
                 continue
 
             if proposed_index in MINES:
                 num_mines += 1
 
             squares_to_check.append(coordinates)
+            
 
     return num_mines, squares_to_check
 
@@ -136,34 +139,25 @@ def has_won():
     return len(EXTENDED | MINES) == len(BOARD)
 
 
-# def heuristic_player():
+# def heuristic_player_directed():
 #     options = []
 #     for i in range(ROWS):
 #         for j in range(COLUMNS):
 #             if MATRIX[i][j] == '?':
 #                 options.append((i, j))
 
-#     # Prioritize squares based on the heuristic
-#     prioritized_squares = []
+#     # Calculate the information gain for each square
+#     information_gain = {}
 #     for square in options:
 #         i, j = square
 #         num_mines, adjacent_squares_list = adjacent_squares(i, j)
 #         unknown_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] == '?']
-#         if num_mines == len(unknown_adjacent_squares):
-#             # All adjacent mines are accounted for, prioritize this square
-#             prioritized_squares.append(square)
+#         information_gain[square] = len(unknown_adjacent_squares)
 
-#     # If there are prioritized squares, choose one randomly from them
-#     if prioritized_squares:
-#         selected_square = random.choice(prioritized_squares)
-#         print(f'Heuristic player plays {selected_square}')
-#         return selected_square
-    
-#     # If no prioritized squares, choose randomly from all options
-#     rand_square = random.choice(options)
-#     print(f'Heuristic player plays random {rand_square}')
-#     return rand_square
-
+#     # Choose the square with the highest information gain
+#     selected_square = max(information_gain, key=information_gain.get)
+#     print(f'Heuristic player with directed exploration plays {selected_square}')
+#     return selected_square
 def heuristic_player_directed():
     options = []
     for i in range(ROWS):
@@ -171,17 +165,75 @@ def heuristic_player_directed():
             if MATRIX[i][j] == '?':
                 options.append((i, j))
 
-    # Calculate the information gain for each square
-    information_gain = {}
+    # Check if any square adjacent to a revealed square has the same number of surrounding unrevealed squares as its number
     for square in options:
         i, j = square
         num_mines, adjacent_squares_list = adjacent_squares(i, j)
-        unknown_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] == '?']
-        information_gain[square] = len(unknown_adjacent_squares)
+        revealed_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] != '?']
+        for adj_square in revealed_adjacent_squares:
+            adj_i, adj_j = adj_square
+            adj_num_mines, adj_adjacent_squares_list = adjacent_squares(adj_i, adj_j)
+            unknown_adjacent_squares = [(x, y) for x, y in adj_adjacent_squares_list if MATRIX[x][y] == '?']
+            if len(unknown_adjacent_squares) == adj_num_mines and len(unknown_adjacent_squares) >0 and get_index(*square) not in FLAGGED_MINES:
+                print(adj_square)
+                print(unknown_adjacent_squares)
+                text = colorize(f'Flagging square {square} as a suspected mine',Colors.RED)
+                print(text)
+                FLAGGED_MINES.add(get_index(*square))
 
-    # Choose the square with the highest information gain
-    selected_square = max(information_gain, key=information_gain.get)
-    print(f'Heuristic player with directed exploration plays {selected_square}')
+    options = []
+    for i in range(ROWS):
+        for j in range(COLUMNS):
+            if MATRIX[i][j] != '?':
+                options.append((i, j))
+
+    information_gain = {}
+    for square in options:
+        if get_index(*square) not in FLAGGED_MINES:
+            i, j = square
+            num_mines, adjacent_squares_list = adjacent_squares(i, j)
+            unknown_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] == '?']
+            information_gain[square] = len(unknown_adjacent_squares)
+
+    sorted_information_gain = sorted(information_gain.items(), key=lambda x: x[1])
+    sorted_information_gain = [(square, gain) for square, gain in sorted_information_gain if gain != 0]
+    # selected_square = None
+    # max_gain = -1
+    # for square, gain in information_gain.items():
+    #     if get_index(*square) not in FLAGGED_MINES and gain > max_gain:
+    #         selected_square = square
+    #         max_gain = gain
+
+    # if selected_square is None:
+    #     # If there are no available squares to select, choose a random square that is not flagged as a mine
+    #     available_squares = [(i, j) for i in range(ROWS) for j in range(COLUMNS) if MATRIX[i][j] == '?' and get_index(i, j) not in FLAGGED_MINES]
+    #     if available_squares:
+    #         selected_square = random.choice(available_squares)
+    #         print(f'No available squares to select. Randomly choosing {selected_square}.')
+    #     else:
+    #         print("No available squares to select.")
+    # else:
+    #     print(f'Heuristic player with directed exploration plays {selected_square}')
+    selected_square = None
+    for square, gain in sorted_information_gain:
+        num_mines, adjacent_squares_list = adjacent_squares(*square)
+        unknown_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] == '?']
+        for squad in unknown_adjacent_squares:
+            if get_index(*squad) not in FLAGGED_MINES:
+                selected_square = squad
+                return selected_square
+
+    if selected_square is None:
+        # If there are no available squares to select, choose a random square that is not flagged as a mine
+        available_squares = [(i, j) for i in range(ROWS) for j in range(COLUMNS) if MATRIX[i][j] == '?' and get_index(i, j) not in FLAGGED_MINES]
+        if available_squares:
+            selected_square = random.choice(available_squares)
+            print(f'No available squares to select. Randomly choosing {selected_square}.')
+        else:
+            print("No available squares to select.")
+    else:
+        print(f'Heuristic player with directed exploration plays {selected_square}')
+
     return selected_square
 
 
@@ -204,6 +256,7 @@ def random_player():
 def run_simulation():
     start_time = time.time()  # Registra el tiempo inicial
     # Restablecer todas las estructuras de datos del tablero
+    
     BOARD.clear()
     MINES.clear()
     EXTENDED.clear()
@@ -212,6 +265,7 @@ def run_simulation():
             MATRIX[i][j] = '?'
     create_board()
 
+    print(MINES)
     print('First move by random player')
     random_square = random_player()
     update_board(random_square)
@@ -225,7 +279,7 @@ def run_simulation():
             elapsed_time = time.time() - start_time  # Calcula el tiempo transcurrido
             return 'lost', elapsed_time
         else:
-            print(draw_board())
+            #print(draw_board())
             print('You won!')
             elapsed_time = time.time() - start_time  # Calcula el tiempo transcurrido
             return 'won', elapsed_time
@@ -235,7 +289,7 @@ def run_simulation():
         square = heuristic_player_directed()
         print(f"Juega en: {square}")
         mine_hit = update_board(square)
-        #print(draw_board())
+        print(draw_board())
         if mine_hit or has_won():
             if mine_hit:
                 reveal_mines()
@@ -251,7 +305,7 @@ def run_simulation():
 
 # Ejecuta la simulación 100 veces y registra los resultados
 with open("resultados.txt", "w") as file:
-    for i in range(100):
+    for i in range(1):
         print(f"\nSimulación {i + 1}")
         resultado, tiempo = run_simulation()
         file.write(f"Simulación {i + 1}: {resultado}, Tiempo: {tiempo} segundos\n")

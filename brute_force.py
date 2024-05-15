@@ -12,7 +12,7 @@ MINES = set()
 EXTENDED = set()
 
 MATRIX = [['?'] * COLUMNS for i in range(ROWS)]
-
+FLAGGED_MINES = set()
 
 class Colors(object):
     BLUE = '\033[94m'
@@ -81,7 +81,7 @@ def adjacent_squares(i, j):
 
             # Skip squares off the board
             proposed_index = get_index(*coordinates)
-            if not proposed_index:
+            if proposed_index is None:
                 continue
 
             if proposed_index in MINES:
@@ -138,79 +138,113 @@ def has_won():
     return len(EXTENDED | MINES) == len(BOARD)
 
 
-def Combination_player():
+def check_completed_square(i, j):
+    num_mines = MATRIX[i][j]
+    num,adjacent_squares_list = adjacent_squares(i, j)
+    flagged_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if get_index(x, y) in FLAGGED_MINES]
+    not_flagged_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if get_index(x, y) not in FLAGGED_MINES]
+    if len(flagged_adjacent_squares) == num_mines:
+        for limp_square in not_flagged_adjacent_squares:
+            x,y = limp_square
+            if MATRIX[x][y] == "?":
+
+                print("square a limpiar ",i,j," y va a aquitar a ",limp_square)
+                
+                mine_hit = update_board(limp_square)
+                #print(draw_board())
+                if mine_hit or has_won():
+                    if mine_hit:
+                        reveal_mines()
+                        #print(draw_board())
+                        print('Game over')
+                        return limp_square
+                        
+                        
+                    else:
+                        #print(draw_board())
+                        print('You won!')
+                        return limp_square
+    return not_flagged_adjacent_squares[0]
+                    
+
+def detect_mines():
     options = []
     for i in range(ROWS):
         for j in range(COLUMNS):
             if MATRIX[i][j] == '?':
                 options.append((i, j))
+    # Check if any square adjacent to a revealed square has the same number of surrounding unrevealed squares as its number
+    for square in options:
+        i, j = square
+        num_mines, adjacent_squares_list = adjacent_squares(i, j)
+        revealed_adjacent_squares = [(x, y) for x, y in adjacent_squares_list if MATRIX[x][y] != '?']
+        for adj_square in revealed_adjacent_squares:
+            adj_i, adj_j = adj_square
+            adj_num_mines, adj_adjacent_squares_list = adjacent_squares(adj_i, adj_j)
+            unknown_adjacent_squares = [(x, y) for x, y in adj_adjacent_squares_list if MATRIX[x][y] == '?']
+            if len(unknown_adjacent_squares) == adj_num_mines and len(unknown_adjacent_squares) >0 and get_index(*square) not in FLAGGED_MINES:
+                text = colorize(f'Flagging square {square} as a suspected mine',Colors.RED)
+                print(text)
+                FLAGGED_MINES.add(get_index(*square))
+
+
+def Combination_player():
+    detect_mines()
     
-    # Iterate over combinations and check for a winning move
-    for r in range(1, len(options) + 1):
-        # Generate combinations of size 'r' and iterate over them
-        for combination in itertools.combinations(options, r):
-            # Track changes made by the current combination
-            for move in combination:
-                update_board(move, selected=False)
-                if has_won():
-                    # If a winning move is found, revert other moves and return the winning move
-                    print(f'Combination player plays {combination}')
-                    for other_move in combination:
-                        if other_move != move:
-                            i, j = other_move
-                            MATRIX[i][j] = '?'
-                    return move
-                else:
-                    # Revert the move since it didn't lead to a win
-                    i, j = move
-                    MATRIX[i][j] = '?'
+    safe_squares = []
+    unknown_squares = []
+
+    for i in range(ROWS):
+        for j in range(COLUMNS):
+            if MATRIX[i][j] == '?':
+                unknown_squares.append((i, j))
+            else:
+                completed_square = check_completed_square(i, j)
+                if completed_square:
+                    safe_squares.append(completed_square)
+
+    if has_won():
+        return safe_squares[0]
+    detect_mines()
+    # If no safe squares were found using direct checks, use combinations to deduce safe moves
+    for combination_size in range(1, len(unknown_squares) + 1):
+        for combination in itertools.combinations(unknown_squares, combination_size):
+            if is_valid_combination(combination):
+                for square in combination:
+                    if get_index(*square) not in FLAGGED_MINES:
+                        return square
     
-    # If no winning move is found, return None
-    return None
+    # If no deductions can be made, fallback to a random move
+    return random_player()
+
+def is_valid_combination(combination):
+    # Placeholder function to check if a given combination is valid
+    # A combination is valid if it satisfies all known clues on the board
+    # For simplicity, let's assume every combination is valid in this placeholder
+    # In practice, this function needs to validate the combination against all revealed clues
+    return True
 
 
 
 
+
+# def random_player():
+#     options = []
+#     for i in range(ROWS):
+#         for j in range(COLUMNS):
+#             if MATRIX[i][j] == '?':
+#                 options.append((i, j))
+#     rand_square = options[random.randint(0, len(options))]
+#     print(f'Random player plays {rand_square}')
+#     return rand_square
 
 def random_player():
-    options = []
-    for i in range(ROWS):
-        for j in range(COLUMNS):
-            if MATRIX[i][j] == '?':
-                options.append((i, j))
-    rand_square = options[random.randint(0, len(options))]
+    options = [(i, j) for i in range(ROWS) for j in range(COLUMNS) if MATRIX[i][j] == '?']
+    if not options:
+        return None
+    rand_square = random.choice(options)
     print(f'Random player plays {rand_square}')
     return rand_square
-
-# if __name__ == '__main__':
-#     create_board()
-
-#     print('Enter coordinates (ie: 0 3)')
-#     first_play = True
-
-#     while True:
-
-#         print(draw_board())
-#         if first_play:
-#           square = random_player()
-#           first_play = False
-#         else:
-#           square = Combination_player()
-
-#         if not square or len(square) < 2:
-#             print('Unable to parse indicies, try again...')
-#             break
-
-#         mine_hit = update_board(square)
-#         if mine_hit or has_won():
-#             if mine_hit:
-#                 reveal_mines()
-#                 print(draw_board())
-#                 print('Game over')
-#             else:
-#                 print(draw_board())
-#                 print('You won!')
-#             break
 
 def run_simulation():
     start_time = time.time()  # Registra el tiempo inicial
@@ -218,6 +252,7 @@ def run_simulation():
     BOARD.clear()
     MINES.clear()
     EXTENDED.clear()
+    FLAGGED_MINES.clear()
     for i in range(ROWS):
         for j in range(COLUMNS):
             MATRIX[i][j] = '?'

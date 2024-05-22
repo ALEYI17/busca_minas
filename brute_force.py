@@ -218,10 +218,7 @@ def Combination_player():
     return random_player()
 
 def is_valid_combination(combination):
-    # Placeholder function to check if a given combination is valid
-    # A combination is valid if it satisfies all known clues on the board
-    # For simplicity, let's assume every combination is valid in this placeholder
-    # In practice, this function needs to validate the combination against all revealed clues
+
     return True
 
 

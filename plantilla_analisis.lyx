@@ -22,14 +22,14 @@ figs-within-sections
 \fontencoding global
 \font_roman "default" "default"
 \font_sans "default" "default"
-\font_typewriter "default" "default"
+\font_typewriter "beramono" "default"
 \font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
-\font_tt_scale 100 100
+\font_tt_scale 60 100
 \use_microtype false
 \use_dash_ligatures true
 \graphics default
@@ -2896,10 +2896,78 @@ check _completed square
 Complejidad
 \end_layout
 
+\begin_layout Standard
+
+\lang spanish
+El algoritmo de fuerza bruta para resolver problemas como Minesweeper se
+ basa en generar todas las combinaciones posibles de las minas en el estado
+ actual del tablero y verificar si cada configuración es válida.
+ Asumiendo que el tablero puede ser de 
+\begin_inset Formula $N×N$
+\end_inset
+
+ o 
+\begin_inset Formula $N×M$
+\end_inset
+
+ y que hay 
+\begin_inset Formula $k$
+\end_inset
+
+ minas, la complejidad se puede descomponer en varios pasos.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Primero, el algoritmo genera todas las posibles configuraciones de minas
+ en las celdas desconocidas.
+ Si hay 
+\begin_inset Formula $U$
+\end_inset
+
+ celdas desconocidas, el número de posibles configuraciones de 
+\begin_inset Formula $k$
+\end_inset
+
+ minas es 
+\begin_inset Formula $\left(C_{k}^{u}\right)$
+\end_inset
+
+.
+ En el peor de los casos, donde todas las celdas son desconocidas ( 
+\begin_inset Formula $U=N×M$
+\end_inset
+
+), el número de combinaciones posibles es exponencial: 
+\begin_inset Formula $O(2^{U})$
+\end_inset
+
+.
+ Esto se debe a que cada celda desconocida puede contener o no una mina,
+ generando así 
+\begin_inset Formula $2^{U}$
+\end_inset
+
+ combinaciones posibles.
+\end_layout
+
 \begin_layout Subsection
 
 \lang spanish
 Notas de implementación
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La implementación completa del código para resolver el problema de busca
+ minas se puede encontrar en el repositorio de GitHub en el siguiente enlace:
+ https://github.com/ALEYI17/busca_minas.
+ Además, la entrega oficial del proyecto se ha realizado a través de la
+ plataforma Brightspace de la Universidad Javeriana, donde se ha subido
+ un archivo comprimido (zip) que contiene todos los archivos necesarios
+ para la ejecución del código.
 \end_layout
 
 \begin_layout Section
@@ -2912,6 +2980,29 @@ Opción algoritmo de heuristica
 
 \lang spanish
 Algoritmo
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El funcionamiento del algoritmo heurístico se centra en la detección de
+ casillas seguras y de riesgo en el tablero.
+ Primero, identifica casillas donde se puede determinar con certeza que
+ no hay minas, como aquellas con todas sus minas adyacentes marcadas o con
+ un número igual al de casillas adyacentes desconocidas.
+ Luego, evalúa las casillas de riesgo, que presentan un alto riesgo de contener
+ minas según la distribución actual del tablero.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Basándose en estas evaluaciones, el algoritmo decide qué casillas revelar
+ a continuación para maximizar la información obtenida sobre el estado del
+ tablero.
+ Esto puede incluir la revelación de casillas seguras para avanzar de manera
+ segura en el juego y la revelación de casillas de riesgo para reducir la
+ incertidumbre sobre la presencia de minas.
 \end_layout
 
 \begin_layout Standard
@@ -4496,6 +4587,7 @@ State
 
 \begin_layout Plain Layout
 
+\size scriptsize
 \lang spanish
 \begin_inset ERT
 status open
@@ -4510,7 +4602,15 @@ State
 \end_inset
 
 
-\begin_inset Formula $sorted\_information\_gain\ensuremath{\leftarrow}information\_gained\_algorithm(sorted\_information\_gain,squ,FLAGGED\_MINES)$
+\begin_inset Formula $sorted\_information\_gain$
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{\leftarrow}$
+\end_inset
+
+
+\begin_inset Formula $information\_gained\_algorithm(sorted\_information\_gain,squ,FLAGGED\_MINES)$
 \end_inset
 
 
@@ -4646,6 +4746,7 @@ State
 
 \begin_layout Plain Layout
 
+\size scriptsize
 \lang spanish
 \begin_inset ERT
 status open
@@ -4869,7 +4970,15 @@ status open
 \end_inset
 
 
-\begin_inset Formula $MATRIX[\ensuremath{i}][\ensuremath{j}]='?'\mathcircumflex get\_index(\ensuremath{i},\ensuremath{j})\ensuremath{\notin}FLAGGED\_MINES$
+\begin_inset Formula $MATRIX[\ensuremath{i}][\ensuremath{j}]='?'$
+\end_inset
+
+
+\begin_inset Formula $\wedge$
+\end_inset
+
+
+\begin_inset Formula $get\_index(\ensuremath{i},\ensuremath{j})\ensuremath{\notin}FLAGGED\_MINES$
 \end_inset
 
 
@@ -5157,16 +5266,395 @@ heuristic player
 Complejidad
 \end_layout
 
+\begin_layout Standard
+
+\lang spanish
+La función check_completed_square verifica si una celda revelada ha identificado
+ todas las minas a su alrededor y, si es así, marca las celdas seguras adyacente
+s.
+ La complejidad de esta función se desglosa de la siguiente manera: la llamada
+ a adjacent_squares(i, j) se asume que es 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ ya que el número de celdas adyacentes es constante.
+ La construcción de las listas flagged_adjacent_squares y not_flagged_adjacent_s
+quares implica recorrer las celdas adyacentes, lo cual también es O(1).
+ En el peor de los casos, update_board se llama para todas las celdas adyacentes
+ no marcadas, lo cual también es 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ por celda adyacente.
+ Por lo tanto, la complejidad total de esta función es 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ por celda, ya que se limita a las celdas adyacentes.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La función detect_mines identifica celdas sospechosas de contener minas
+ y las marca.
+ La complejidad de esta función es la siguiente: la iteración doble sobre
+ todas las celdas del tablero tiene una complejidad de 
+\begin_inset Formula $O(N×M)$
+\end_inset
+
+ .
+ La llamada a adjacent_squares por cada celda desconocida es 
+\begin_inset Formula $O(1)$
+\end_inset
+
+.
+ La construcción de las listas revealed_adjacent_squares y unknown_adjacent_squa
+res es 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ por celda adyacente.
+ La verificación de cada cuadrado adyacente revelado es 
+\begin_inset Formula $O(1)$
+\end_inset
+
+.
+ En total, la complejidad de esta función es 
+\begin_inset Formula $O(N×M)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La función information_gained_algorithm evalúa la ganancia de información
+ para cada celda revelada y ordena las celdas según esta métrica.
+ Su complejidad es la siguiente: la iteración doble sobre todas las celdas
+ del tablero es 
+\begin_inset Formula $O(N×M)$
+\end_inset
+
+.
+ La llamada a adjacent_squares y la construcción de unknown_adjacent_squares
+ es 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ por celda adyacente.
+ La ordenación de las celdas según la ganancia de información tiene una
+ complejidad de 
+\begin_inset Formula $O(UlogU)$
+\end_inset
+
+, donde 
+\begin_inset Formula $U$
+\end_inset
+
+ es el número de celdas reveladas.
+ Por lo tanto, la complejidad total de esta función es 
+\begin_inset Formula $O(N×M$
+\end_inset
+
+, 
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La función find_play selecciona la siguiente jugada segura basada en la
+ ganancia de información.
+ Su complejidad es la siguiente: la iteración sobre la lista ordenada sorted_inf
+ormation_gain tiene una complejidad de 
+\begin_inset Formula $O(U)$
+\end_inset
+
+.
+ La llamada a adjacent_squares y la construcción de unknown_adjacent_squares
+ es 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ por celda adyacente.
+ Por lo tanto, la complejidad total de esta función es 
+\begin_inset Formula $O(U)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La función principal heuristic_player_directed coordina las funciones anteriores
+ para hacer una jugada dirigida basada en la heurística.
+ Su complejidad es la siguiente: cada llamada a detect_mines tiene una complejid
+ad de 
+\begin_inset Formula $O(N×M)$
+\end_inset
+
+.
+ La llamada a information_gained_algorithm tiene una complejidad de 
+\begin_inset Formula $O(N×M)$
+\end_inset
+
+.
+ La iteración sobre sorted_information_gain para verificar celdas completadas
+ es 
+\begin_inset Formula $O(U)$
+\end_inset
+
+.
+ La llamada a find_play tiene una complejidad de 
+\begin_inset Formula $O(U)$
+\end_inset
+
+.
+ En caso de no encontrar celdas seguras, la iteración para seleccionar una
+ celda al azar es 
+\begin_inset Formula $O(N×M)$
+\end_inset
+
+.
+ Por lo tanto, la complejidad total del algoritmo es 
+\begin_inset Formula $O(N×M)$
+\end_inset
+
+, ya que esta parte domina las otras complejidades.
+\end_layout
+
 \begin_layout Subsection
 
 \lang spanish
 Notas de implementación
 \end_layout
 
+\begin_layout Standard
+
+\lang spanish
+La implementación completa del código para resolver el problema de busca
+ minas se puede encontrar en el repositorio de GitHub en el siguiente enlace:
+ https://github.com/ALEYI17/busca_minas.
+ Además, la entrega oficial del proyecto se ha realizado a través de la
+ plataforma Brightspace de la Universidad Javeriana, donde se ha subido
+ un archivo comprimido (zip) que contiene todos los archivos necesarios
+ para la ejecución del código.
+\end_layout
+
 \begin_layout Part
 
 \lang spanish
 Comparación de los algoritmos
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Se comparan los resultados obtenidos por el algoritmo de fuerza bruta y
+ el algoritmo heurístico aplicados a la resolución del juego Busca Minas.
+ Ambos algoritmos abordan el problema desde enfoques distintos y, como tal,
+ sus desempeños varían en términos de eficiencia y precisión.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El algoritmo de fuerza bruta genera todas las posibles combinaciones de
+ minas para el estado actual del tablero y verifica la validez de cada configura
+ción.
+ Este enfoque garantiza una solución precisa, ya que explora exhaustivamente
+ todas las posibilidades.
+ Sin embargo, su complejidad exponencial lo hace impráctico para tableros
+ de gran tamaño o con muchas minas, debido al tiempo de ejecución extremadamente
+ largo y al alto consumo de recursos computacionales.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Por otro lado, el algoritmo heurístico utiliza un enfoque más inteligente
+ para deducir celdas seguras basándose en la información revelada y en reglas
+ heurísticas.
+ Este algoritmo no garantiza encontrar siempre la solución correcta, pero
+ es significativamente más eficiente en términos de tiempo de ejecución
+ y uso de recursos.
+ La heurística permite identificar rápidamente celdas seguras en la mayoría
+ de los casos, lo que lo hace adecuado para tableros más grandes y situaciones
+ más complejas.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La comparación entre ambos algoritmos se realizará comparando sus tiempos
+ de ejecución y los resultados obtenidos en términos del número de victorias.
+ Para ello, se midió el tiempo de ejecución total de cada algoritmo y se
+ realizaron simulaciones de 100 juegos para evaluar el porcentaje de victorias
+ obtenidas por cada uno.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename victorias.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparación
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Comparación victorias:
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Al analizar la gráfica que compara las victorias entre el algoritmo heurístico
+ y el algoritmo de fuerza bruta, se destaca claramente que el algoritmo
+ de fuerza bruta logró un mayor número de victorias, alcanzando aproximadamente
+ un 60% de éxito en 100 simulaciones.
+ Por otro lado, el algoritmo que utilizaba heurísticas obtuvo alrededor
+ de 50 victorias, lo que indica que, aunque pierde más en comparación con
+ el enfoque de fuerza bruta, sigue siendo una solución muy competitiva y
+ efectiva.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Este resultado era de esperar, dado que el enfoque de fuerza bruta examina
+ exhaustivamente todas las posibilidades, lo que le permite encontrar soluciones
+ precisas en un mayor número de casos.
+ Mientras tanto, el algoritmo heurístico, si bien ofrece una solución más
+ eficiente en términos de tiempo de ejecución, muestra una tasa de éxito
+ ligeramente menor en comparación con el enfoque de fuerza bruta.
+\end_layout
+
+\begin_layout Paragraph
+
+\lang spanish
+Comparación tiempos:
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+En la gráfica de tiempos se puede observar que, como se esperaba, el tiempo
+ de ejecución del algoritmo de fuerza bruta es considerablemente mayor que
+ el del algoritmo heurístico.
+ Esto se debe a que el algoritmo de fuerza bruta examina todas las combinaciones
+ posibles, lo que implica un mayor tiempo de procesamiento.
+ En este caso particular, aunque el tiempo del algoritmo de fuerza bruta
+ es más alto, es importante destacar que se reduce significativamente gracias
+ a que solo se están considerando los espacios sin conocer adyacentes.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+En la gráfica, el algoritmo de fuerza bruta tiene una media de aproximadamente
+ 0.04 segundos, mientras que el algoritmo heurístico tiene un tiempo medio
+ de ejecución de alrededor de 0.025 segundos.
+ Esta diferencia en los tiempos de ejecución demuestra claramente la eficiencia
+ del enfoque heurístico, que logra encontrar soluciones aceptables en un
+ tiempo mucho más corto en comparación con el enfoque de fuerza bruta.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La disparidad en los tiempos de ejecución entre ambos algoritmos era de
+ esperarse debido a sus enfoques fundamentales.
+ Mientras que el algoritmo de fuerza bruta realiza una exhaustiva exploración
+ de todas las posibles combinaciones, el algoritmo heurístico utiliza reglas
+ y estimaciones para tomar decisiones de manera más rápida y eficiente.
+ A pesar de esta diferencia en complejidad computacional, el tiempo promedio
+ de ejecución del algoritmo de fuerza bruta se mantiene en un nivel razonable
+ gracias a la optimización que realiza al considerar solo los espacios adyacente
+s desconocidos.
+ Por otro lado, el algoritmo heurístico logra mantener un tiempo de ejecución
+ significativamente menor, lo que demuestra su capacidad para encontrar
+ soluciones aceptables en un tiempo más corto, aunque a costa de una menor
+ precisión en algunos casos.
+\end_layout
+
+\begin_layout Part
+
+\lang spanish
+Conclusión
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La comparación entre los algoritmos de fuerza bruta y heurísticos para el
+ juego de Busca Minas ofrece una visión interesante sobre la complejidad
+ del problema.
+ Es evidente que el juego de Busca Minas es un problema NP-completo, lo
+ que significa que encontrar una solución óptima puede requerir un tiempo
+ prohibitivamente largo en función del tamaño del tablero.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El algoritmo de fuerza bruta proporciona una solución precisa y acertada
+ al examinar exhaustivamente todas las combinaciones posibles.
+ Sin embargo, esta precisión conlleva un costo significativo en términos
+ de tiempo de ejecución, lo que puede limitar su aplicabilidad en casos
+ donde se requiere una respuesta rápida.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Por otro lado, el algoritmo heurístico ofrece una alternativa más eficiente
+ en términos de tiempo de ejecución al utilizar reglas y estimaciones para
+ tomar decisiones.
+ Aunque su precisión puede ser menor en comparación con el enfoque de fuerza
+ bruta, su capacidad para encontrar soluciones aceptables en un tiempo mucho
+ más corto lo hace muy atractivo, especialmente en aplicaciones donde la
+ rapidez es esencial.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+En conclusión, el uso de heurísticas proporciona una excelente forma de
+ aproximar la solución del juego de Busca Minas y otros problemas similares.
+ Si bien es posible que no ofrezcan una solución óptima en todos los casos,
+ su tiempo computacional eficiente los convierte en una herramienta valiosa
+ para abordar problemas complejos en la práctica.
 \end_layout
 
 \end_body

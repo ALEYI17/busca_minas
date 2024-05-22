@@ -425,7 +425,11 @@ status open
 
 \end_inset
 
-Bublle sort 
+ 
+\begin_inset Formula $Combination\_player$
+\end_inset
+
+ 
 \begin_inset ERT
 status open
 
@@ -448,7 +452,95 @@ status open
 \end_inset
 
 
-\begin_inset Formula $S$
+\begin_inset Formula $ROWS,COLUMNS,MATRIX,FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $detect\_mines(ROWS,COLUMNS,MATRIX,FLAGGED\_MINES)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $unknown\_squares\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{i\leftarrow0}toROWS-1$
 \end_inset
 
 
@@ -492,67 +584,7 @@ status open
 \end_inset
 
 
-\begin_inset Formula $j\leftarrow1$
-\end_inset
-
- 
-\begin_inset Formula $\mathbf{to}$
-\end_inset
-
- 
-\begin_inset Formula $\left\lceil S\right\rceil $
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang spanish
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-For
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\end_inset
-
-
-\begin_inset Formula $i\leftarrow1$
-\end_inset
-
- 
-\begin_inset Formula $\mathbf{to}$
-\end_inset
-
- 
-\begin_inset Formula $\left\lceil S\right\rceil $
+\begin_inset Formula $\ensuremath{j\leftarrow0}toCOLUMNS-1$
 \end_inset
 
 
@@ -596,7 +628,7 @@ status open
 \end_inset
 
 
-\begin_inset Formula $S[i]>S[i+1]$
+\begin_inset Formula $MATRIX[i][j]='?'$
 \end_inset
 
 
@@ -629,7 +661,307 @@ State
 \end_inset
 
 
-\begin_inset Formula $Swap(S,i,i+1)$
+\begin_inset Formula $unknown\_squares.append((\ensuremath{i},\ensuremath{j}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $check\_completed\_square(\ensuremath{i},\ensuremath{j})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $detect\_mines(ROWS,COLUMNS,MATRIX,FLAGGED\_MINES)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $combination\_size\leftarrow1,\left|unknown\_squares+1)\right|$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $combination\in combinations(unknown\_squares,combination\_size)$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $square\in combination$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $get\_index(square)\ensuremath{\notin}FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $Return$
+\end_inset
+
+ 
+\begin_inset Formula $square$
 \end_inset
 
 
@@ -697,9 +1029,130 @@ status open
 
 \begin_layout Plain Layout
 
-  
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
 \backslash
 State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $RandomPlayer()$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndProcedure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Combination_player
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procedure
 \end_layout
 
 \end_inset
@@ -710,9 +1163,18 @@ status open
 
 \begin_layout Plain Layout
 
+{
+\end_layout
 
-\backslash
-Return
+\end_inset
+
+ Detect Mines 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
 \end_layout
 
 \end_inset
@@ -729,7 +1191,7 @@ status open
 \end_inset
 
 
-\begin_inset Formula $S$
+\begin_inset Formula $ROWS,COLUMNS,MATRIX,FLAGGED\_MINES$
 \end_inset
 
 
@@ -739,6 +1201,868 @@ status open
 \begin_layout Plain Layout
 
 }
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $options\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $i\leftarrow0\ensuremath{toROWS-1}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{\ensuremath{j\leftarrow0}toCOLUMNS-1}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $MATRIX[i][j]='?'$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $options.append((i,j))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $square\in options$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{i,j\leftarrow}square$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $num\_mines,adjacent\_squares\_list\ensuremath{\leftarrow}adjacent\_squares(\ensuremath{i},\ensuremath{j})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $revealed\_adjacent\_squares\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{adj\_square\in revealed\_adjacent\_squares}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $MATRIX[\ensuremath{x}][\ensuremath{y}]\ensuremath{\neq}'?''$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $revealed\_adjacent\_squares.append((\ensuremath{x},\ensuremath{y}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{x},\ensuremath{y})\in adjacent\_squares\_list$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $adj\_i,adj\_j\ensuremath{\leftarrow}adj\_square$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $adj\_num\_mines,adj\_adjacent\_squares\_list\ensuremath{\leftarrow}adjacent\_squares(adj\_i,adj\_j)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $unknown\_adjacent\_squares\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $(\ensuremath{x},\ensuremath{y})\in adj\_adjacent\_squares\_list$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $MATRIX[\ensuremath{x}][\ensuremath{y}]='?'$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $unknown\_adjacent\_squares.append((\ensuremath{x},\ensuremath{y}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $(unknown\_adjacent\_squares=adj\_num\_mines\mathcircumflex\left|unknown\_adjacent\_squares\right|>0\mathcircumflex get\_index(\ensuremath{i},\ensuremath{j})\notin FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $FLAGGED\_MINES.add(get\_index(\ensuremath{i},\ensuremath{j}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
 \end_layout
 
 \end_inset
@@ -788,7 +2112,772 @@ end{algorithmic}
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Fuerza bruta
+
+\lang spanish
+Detect mines
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procedure
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $check\_completed\_square$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{i},\ensuremath{j}$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $num\_mines\ensuremath{\leftarrow}MATRIX[\ensuremath{i}][\ensuremath{j}]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $num,adjacent\_squares\_list\ensuremath{\leftarrow}adjacent\_squares(\ensuremath{i},\ensuremath{j})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $flagged\_adjacent\_squares\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $(\ensuremath{x},\ensuremath{y})\in adjacent\_squares\_list$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $get\_index(\ensuremath{x},\ensuremath{y})\ensuremath{\in}FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $flagged\_adjacent\_squares.append((\ensuremath{x},\ensuremath{y}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $not\_flagged\_adjacent\_squares\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $(\ensuremath{x},\ensuremath{y})\in adjacent\_squares\_list$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $get\_index(\ensuremath{x},\ensuremath{y})\ensuremath{\notin}FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $not\_flagged\_adjacent\_squares.append((\ensuremath{x},\ensuremath{y}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\left|flagged\_adjacent\_squares\right|=num\_mines$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $limp\_square\in not\_flagged\_adjacent\_squares$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{x,y\leftarrow}limp\_square$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $MATRIX[\ensuremath{x}][\ensuremath{y}]="?"$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $mine\_hit\ensuremath{\leftarrow}update\_board(limp\_square)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndProcedure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang spanish
+check _completed square
 \end_layout
 
 \end_inset
@@ -810,37 +2899,2262 @@ Complejidad
 \begin_layout Subsection
 
 \lang spanish
-Invariante
+Notas de implementación
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Section
 
-\series bold
-\bar under
 \lang spanish
-Inicio
-\series default
-\bar default
-: 
+Opción algoritmo de heuristica
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Subsection
 
-\series bold
-\bar under
 \lang spanish
-Avance
-\series default
-\bar default
-: 
+Algoritmo
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 
-\series bold
-\bar under
 \lang spanish
-Terminación
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procedure
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $information\_gained\_algorithm$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $ROWS,COLUMNS,MATRIX,FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $options\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $i\leftarrow0\ensuremath{toROWS-1}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{\ensuremath{j\leftarrow0}toCOLUMNS-1}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $MATRIX[\ensuremath{i}][\ensuremath{j}]\ensuremath{\neq}'?'$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $options.append((i,j))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $information\_gain\ensuremath{\leftarrow}\{\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $square\in options$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $get\_index(square)\ensuremath{\notin}FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{i,j\leftarrow}square$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $num\_mines,adjacent\_squares\_list\ensuremath{\leftarrow}adjacent\_squares(\ensuremath{i},\ensuremath{j})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $unknown\_adjacent\_squares\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $(\ensuremath{x},\ensuremath{y})\in adjacent\_squares\_list$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $MATRIX[\ensuremath{x}][\ensuremath{y}]='?'$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $unknown\_adjacent\_squares.append((\ensuremath{x},\ensuremath{y}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $information\_gain[square]\ensuremath{\leftarrow}\left|unknown\_adjacent\_squares\right|$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $sorted\_information\_gain\ensuremath{\leftarrow}MergeSort(information\_gain.items())$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $sorted\_information\_gain\ensuremath{\leftarrow}MergeSort(information\_gain.items())$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $RETURN$
+\end_inset
+
+ 
+\begin_inset Formula $sorted\_information\_gain$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndProcedure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang spanish
+information gained algorithm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procedure
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $find\_play$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $sorted\_information\_gain,squ,FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $selected\_square\ensuremath{\leftarrow}squ$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $square,gain\in sorted\_information\_gain$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $num\_mines,adjacent\_squares\_list\ensuremath{\leftarrow}adjacent\_squares(square)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $unknown\_adjacent\_squares\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $(\ensuremath{x},\ensuremath{y})\in adjacent\_squares\_list$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $MATRIX[\ensuremath{x}][\ensuremath{y}]='?'$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $unknown\_adjacent\_squares.append((\ensuremath{x},\ensuremath{y}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $squad\in unknown\_adjacent\_squares$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $get\_index(squad)\ensuremath{\notin}FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $selected\_square\ensuremath{\leftarrow}squad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $Return$
+\end_inset
+
+ 
+\begin_inset Formula $selected\_square$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $Return$
+\end_inset
+
+ 
+\begin_inset Formula $selected\_square$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndProcedure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang spanish
+find play
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procedure
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $heuristic\_player\_directed$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $ROWS,COLUMNS,MATRIX,FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $detect\_mines(ROWS,COLUMNS,MATRIX,FLAGGED\_MINES)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $sorted\_information\_gain\ensuremath{\leftarrow}information\_gained\_algorithm(sorted\_information\_gain,squ,FLAGGED\_MINES)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $selected\_square\ensuremath{\leftarrow}\textrm{Ø}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $square,gain\in sorted\_information\_gain$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $selected\_square\ensuremath{\leftarrow}check\_completed\_square(square)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $detect\_mines(ROWS,COLUMNS,MATRIX,FLAGGED\_MINES)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $sorted\_information\_gain\ensuremath{\leftarrow}information\_gained\_algorithm(sorted\_information\_gain,squ,FLAGGED\_MINES)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $selected\_square\ensuremath{\leftarrow}find\_play(sorted\_information\_gain,selected\_square,FLAGGED\_MINES)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $selected\_square=\textrm{Ø}$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $available\_squares\ensuremath{\leftarrow}[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{i\leftarrow0}toROWS-1$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+For
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ensuremath{j\leftarrow0}toCOLUMNS-1$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $MATRIX[\ensuremath{i}][\ensuremath{j}]='?'\mathcircumflex get\_index(\ensuremath{i},\ensuremath{j})\ensuremath{\notin}FLAGGED\_MINES$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $available\_squares.append((\ensuremath{i},\ensuremath{j}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndFor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+If
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $available\_squares$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $selected\_square\ensuremath{\leftarrow}random(available\_squares)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndIf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+State
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $Return$
+\end_inset
+
+ 
+\begin_inset Formula $selected\_square$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndProcedure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang spanish
+heuristic player
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang spanish
+Complejidad
 \end_layout
 
 \begin_layout Subsection

@@ -87,11 +87,21 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-Taller 4- Busca minas
+Taller 4- 
+\lang spanish
+Busca
+\lang english
+ 
+\lang spanish
+minas
 \end_layout
 
 \begin_layout Author
-Alejandro Salamanca, Andrés Salamanca
+Alejandro 
+\lang spanish
+Salamanca
+\lang english
+, Andrés Salamanca
 \end_layout
 
 \begin_layout Date
@@ -182,7 +192,7 @@ El problema del busca minas se presenta como un desafío complejo en el que
 \begin_inset Formula $N,M,X\in\mathbb{N}$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -340,7 +350,21 @@ Algoritmos
 \begin_layout Section
 
 \lang spanish
-Opción algoritmo 1
+Opción algoritmo de fuerza bruta
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La estrategia de fuerza bruta para el juego de buscaminas implica probar
+ todas las posibles combinaciones de casillas ocultas en el tablero, desde
+ una casilla hasta todas las casillas disponibles.
+ Para cada combinación generada, se simula el efecto de revelar las casillas
+ correspondientes en el tablero y se verifica si esta situación conduce
+ a una victoria en el juego.
+ Este enfoque garantiza encontrar una solución correcta al problema, pero
+ puede ser computacionalmente costoso, especialmente en tableros grandes,
+ debido a la exhaustividad de la búsqueda.
 \end_layout
 
 \begin_layout Subsection
